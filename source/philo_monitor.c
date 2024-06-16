@@ -23,6 +23,7 @@ void	print_message(char *str, t_philo *philo, int id)
 	if (!dead_loop(philo))
 		printf("%zu %d %s\n", time, id, str);
 	pthread_mutex_unlock(philo->write_lock);
+	return ;
 }
 
 // Checks if the philosopher is dead
@@ -34,7 +35,7 @@ int	philosopher_dead(t_philo *philo, size_t time_to_die)
 		&& philo->eating == FALSE)
 		return (pthread_mutex_unlock(philo->meal_lock), 1);
 	pthread_mutex_unlock(philo->meal_lock);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 // Check if any philo died
@@ -51,11 +52,11 @@ int	dead_flag(t_philo *philos)
 			pthread_mutex_lock(philos[0].dead_lock);
 			*philos->dead = 1;
 			pthread_mutex_unlock(philos[0].dead_lock);
-			return (1);
+			return (EXIT_FAILURE);
 		}
 		i++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 // Checks if all the philos ate the num_of_meals

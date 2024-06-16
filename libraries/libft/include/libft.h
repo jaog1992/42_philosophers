@@ -57,8 +57,8 @@ int		ft_puthex_x_fd(uintptr_t ptr, const char format, int fd);
 int		ft_puthex_ux_fd(uintptr_t ptr, const char format, int fd);
 int		ft_putptr_fd(uintptr_t ptr, const char format, int fd, int flag);
 int		ft_printf(char const *str, ...);
-int 	ft_print_red(char *s);
-int	    ft_print_green(char *s);
+int		ft_print_red(char *s);
+int		ft_print_green(char *s);
 int		ft_print_error(char *s);
 
 //  FT_STR
@@ -93,6 +93,6 @@ char	*ft_uitoa(unsigned int n);
 
 //  FT_TIME
 size_t	ft_gettime(void);
-int	    ft_usleep(size_t milliseconds);
+int		ft_usleep(size_t milliseconds);
 
 #endif

@@ -61,7 +61,8 @@ typedef struct s_program
 // Initialization
 void	init_program(t_program *program, t_philo *philos);
 void	init_forks(pthread_mutex_t *forks, int philos_num);
-void	init_philos(t_philo *philos, t_program *program, pthread_mutex_t *forks, char **argv);
+void	init_philos(t_philo *philos, t_program *program, \
+					pthread_mutex_t *forks, char **argv);
 void	init_input(t_philo *philos, char **argv);
 
 // Threads

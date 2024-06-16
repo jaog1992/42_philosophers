@@ -13,7 +13,7 @@
 #include "philo.h"
 #include "../libraries/libft/include/libft.h"
 
-// Init program structre
+// Init program structure
 void	init_program(t_program *program, t_philo *philos)
 {
 	program->dead_flag = 0;
@@ -21,6 +21,7 @@ void	init_program(t_program *program, t_philo *philos)
 	pthread_mutex_init(&program->dead_lock, NULL);
 	pthread_mutex_init(&program->meal_lock, NULL);
 	pthread_mutex_init(&program->write_lock, NULL);
+	return ;
 }
 
 // Init fork mutexes
@@ -34,9 +35,11 @@ void	init_forks(pthread_mutex_t *forks, int philos_num)
 		pthread_mutex_init(&forks[i], NULL);
 		i++;
 	}
+	return ;
 }
 
 // Init user args
+// if argv[5] num_times_to_eat is set. else -1
 void	init_input(t_philo *philos, char **argv)
 {
 	philos->time_to_die = ft_atoi(argv[2]);
@@ -47,6 +50,7 @@ void	init_input(t_philo *philos, char **argv)
 		philos->num_times_to_eat = ft_atoi(argv[5]);
 	else
 		philos->num_times_to_eat = -1;
+	return ;
 }
 
 // Init philosophers
@@ -75,4 +79,5 @@ void	init_philos(t_philo *philos, t_program *program, \
 			philos[i].l_fork = &forks[i - 1];
 		i++;
 	}
+	return ;
 }

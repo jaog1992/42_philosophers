@@ -18,6 +18,7 @@
 void	think(t_philo *philo)
 {
 	print_message("is thinking", philo, philo->id);
+	return ;
 }
 
 // Dream routine funtion
@@ -26,6 +27,7 @@ void	dream(t_philo *philo)
 {
 	print_message("is sleeping", philo, philo->id);
 	ft_usleep(philo->time_to_sleep);
+	return ;
 }
 
 // Eat routine funtion
@@ -52,4 +54,5 @@ void	eat(t_philo *philo)
 	philo->eating = FALSE;
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
+	return ;
 }

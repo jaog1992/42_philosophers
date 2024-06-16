@@ -68,8 +68,10 @@ void	*philo_routine(void *pointer)
 //                          void *(*start_routine)(void *),
 //                          void *restrict arg);
 
-// ¿Se hace el pthread_join sin haber terminado el thread del witness o del philo?
-// ¿Como sabe thread_create cuando hacer el join? ¿Donde espera a que se termine el thread para unirlo al del main?
+// ¿Se hace el pthread_join sin haber terminado el thread del Witness o del 
+// philo?
+// ¿Como sabe thread_create cuando hacer el join? ¿Donde espera a que se 
+// termine el thread para unirlo al del main?
 int	thread_create(t_program *program, pthread_mutex_t *forks)
 {
 	int			i;
