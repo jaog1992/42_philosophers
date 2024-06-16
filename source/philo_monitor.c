@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "philo.h"
-#include "../libraries/libft/include/libft.h"
 
 // Print message funtion
 void	print_message(char *str, t_philo *philo, int id)
@@ -27,7 +26,6 @@ void	print_message(char *str, t_philo *philo, int id)
 }
 
 // Checks if the philosopher is dead
-// ¿Por que pthread_mutex_unlock a veces tiene 2 argumentos y otras 1?
 int	philosopher_dead(t_philo *philo, size_t time_to_die)
 {
 	pthread_mutex_lock(philo->meal_lock);
@@ -60,7 +58,6 @@ int	dead_flag(t_philo *philos)
 }
 
 // Checks if all the philos ate the num_of_meals
-// ¿Por que nuestro flag de todos han comido tambien es philos->dead == 1?
 int	no_more_meals_flag(t_philo *philos)
 {
 	int	i;
@@ -89,7 +86,7 @@ int	no_more_meals_flag(t_philo *philos)
 }
 
 // Monitor thread routine
-void	*monitor_routine(void *pointer)
+void	*witness_routine(void *pointer)
 {
 	t_philo	*philos;
 

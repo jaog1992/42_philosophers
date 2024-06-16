@@ -28,13 +28,11 @@ GREEN		=	\033[0;92m
 # Directories
 SRC_DIR       = source/
 INC_DIR       = source/
-LIBFT_DIR     = libraries/libft/
-LIBFT_INC_DIR = libraries/libft/include/
 OBJ_DIR       = source/
 BIN_DIR       = ./
 
 # Source files
-SRC_FILE      = philo_main.c philo_actions.c philo_monitor.c philo_threads.c philo_init.c
+SRC_FILE      = philo_main.c philo_actions.c philo_monitor.c philo_threads.c philo_init.c philo_utils.c
 SRC           = $(addprefix $(SRC_DIR), $(SRC_FILE))
 OBJ_FILE      = $(SRC_FILE:.c=.o)
 OBJ           = $(addprefix $(OBJ_DIR), $(OBJ_FILE))
@@ -46,17 +44,11 @@ CODE		  =	philo
 # Binary name for your program
 CODE_BIN      = $(BIN_DIR)$(CODE)
 
-# Static library
-LIBFT         = $(LIBFT_DIR)libft.a
-
 # Output executable
 NAME          = $(CODE)
 
 # Create the obj/ and bin/ directories if they don't exist
 #$(shell mkdir -p $(OBJ_DIR) $(BIN_DIR))
-
-# Variable to control if the library has been built
-LIBFT_BUILT   = no
 
 # $(info $(BLUE) SRC_DIR is $(GREEN) $(SRC_DIR) $(DEF_COLOR))
 # $(info $(BLUE) SRC_FILE is $(GREEN) $(SRC_FILE) $(DEF_COLOR))
@@ -85,15 +77,9 @@ all: $(CODE_BIN)
 # -lft para que el enlazador busque una biblioteca que siga la convención de nombramiento estándar (lib + nombre), en este caso, libft.
 # -o $@ para indicar el nombre de salida del ejecutable. -o indica que el siguiente nombre es el del ejecutable y $@ para que sea lo que se guarda en la variable CODE_BIN
 
-$(CODE_BIN): $(LIBFT) $(OBJ)
-	@$(CC) $(CCFLAGS) -o $@ $(OBJ) -I $(INC_DIR) -I $(LIBFT_INC_DIR) -L $(LIBFT_DIR) -lft 
+$(CODE_BIN): $(OBJ)
+	@$(CC) $(CCFLAGS) -o $@ $(OBJ) -I $(INC_DIR) 
 	@echo "$(GREEN)✔ $(BLUE)$(USER_NAME)'s $(CODE_BIN) compilation$(DEF_COLOR)"
-
-$(LIBFT):
-	@if [ "$(LIBFT_BUILT)" = "no" ]; then \
-		make -C $(LIBFT_DIR); \
-		LIBFT_BUILT=yes; \
-	fi
 
 # % es un comodín que indica que la regla se aplicará a todo archivo que termine por .o en el directorio $(OBJ_DIR)
 # $< hace referencia al primer requisito de la regla, en nuestro caso, $(SRC_DIR)%.c
@@ -104,12 +90,10 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 clean:
 	@$(RM) $(OBJ)
 	@echo "$(GREEN)✔ $(BLUE)$(USER_NAME)'s $(CODE_BIN) .o files removal$(DEF_COLOR)"
-	@make -C $(LIBFT_DIR) fclean
 
 fclean: clean
 	@$(RM) $(CODE_BIN)
 	@echo "$(GREEN)✔ $(BLUE)$(USER_NAME)'s $(CODE_BIN) executable and .o files removal$(DEF_COLOR)"
-	@make -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

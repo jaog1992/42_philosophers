@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "philo.h"
-#include "../libraries/libft/include/libft.h"
 
 // Init program structure
 void	init_program(t_program *program, t_philo *philos)
@@ -39,7 +38,6 @@ void	init_forks(pthread_mutex_t *forks, int philos_num)
 }
 
 // Init user args
-// if argv[5] num_times_to_eat is set. else -1
 void	init_input(t_philo *philos, char **argv)
 {
 	philos->time_to_die = ft_atoi(argv[2]);

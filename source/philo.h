@@ -14,17 +14,15 @@
 # define PHILO_H
 
 # include <pthread.h>
+# include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
-# include <unistd.h>
-# include "../libraries/libft/include/libft.h"
+#include <time.h>
 
 # define PHILO_MAX 200
 # define TRUE 1
 # define FALSE 0
-// EXIT_SUCCESS	0
-// EXIT_FAILURE	1
 
 // The structure of each philosopher
 typedef struct s_philo
@@ -75,12 +73,20 @@ void	destroy_mutex(char *str, t_program *program, pthread_mutex_t *forks);
 void	think(t_philo *philo);
 void	dream(t_philo *philo);
 void	eat(t_philo *philo);
+void	print_message(char *str, t_philo *philo, int id);
 
 // Monitor
-void	*monitor_routine(void *pointer);
+void	*witness_routine(void *pointer);
 int		no_more_meals_flag(t_philo *philos);
 int		dead_flag(t_philo *philos);
 int		philosopher_dead(t_philo *philo, size_t time_to_die);
-void	print_message(char *str, t_philo *philo, int id);
 
+// Utils
+int		ft_isdigit(int c);
+size_t	ft_strlen(const char *s);
+int		ft_print_red(char *s);
+int		ft_print_error(char *s);
+int		ft_atoi(const char	*str);
+int		ft_usleep(size_t milliseconds);
+size_t	ft_gettime(void);
 #endif

@@ -11,10 +11,8 @@
 /* ************************************************************************** */
 
 #include "philo.h"
-#include "../libraries/libft/include/libft.h"
 
 // Think routine funtion
-
 void	think(t_philo *philo)
 {
 	print_message("is thinking", philo, philo->id);
@@ -22,7 +20,6 @@ void	think(t_philo *philo)
 }
 
 // Dream routine funtion
-
 void	dream(t_philo *philo)
 {
 	print_message("is sleeping", philo, philo->id);
@@ -31,7 +28,6 @@ void	dream(t_philo *philo)
 }
 
 // Eat routine funtion
-
 void	eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);

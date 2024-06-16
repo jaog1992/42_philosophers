@@ -1,29 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_init.c                                       :+:      :+:    :+:   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jde-orma <jde-orma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:30:00 by jde-orma          #+#    #+#             */
-/*   Updated: 2024/06/16 11:30:00 by jde-orma         ###   ########.fr       */
+/*   Updated: 2024/06/16 23:11:45 by jde-orma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
+#include "philo.h"
+
+size_t	ft_gettime(void)
+{
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL) == -1)
+		ft_print_error("gettimeofday() error\n");
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+int	ft_usleep(size_t milliseconds)
+{
+	size_t	start;
+
+	start = ft_gettime();
+	while ((ft_gettime() - start) < milliseconds)
+		usleep(500);
+	return (0);
+}
 
 int	ft_atoi(const char	*str)
 {
 	int	i;
 	int	sign;
-	int	numb;
+	int	num;
 	int	flag;
 
 	i = 0;
 	flag = 0;
+	num = 0;
 	sign = 1;
-	numb = 0;
 	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
 		i++;
 	while ((str[i] == '+' || str[i] == '-') && flag == 0)
@@ -35,10 +53,10 @@ int	ft_atoi(const char	*str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		numb = (str[i] - '0') + (numb * 10);
+		num = (str[i] - '0') + (num * 10);
 		i++;
 	}
-	return (numb * sign);
+	return (num * sign);
 }
 
 int	ft_print_red(char *s)

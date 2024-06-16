@@ -11,7 +11,23 @@
 /* ************************************************************************** */
 
 #include "philo.h"
-#include "../libraries/libft/include/libft.h"
+
+int	ft_isdigit(int c)
+{
+	return ((c > 47 && c < 58));
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
 
 int	ft_string_of_digits(char *str)
 {
@@ -46,34 +62,7 @@ int	init_argument_check(int argc, char **argv)
 		return (ft_print_error("Invalid total meal number per philosopher\n"));
 	return (EXIT_SUCCESS);
 }
-// memset, , malloc, free, write,
-// usleep, gettimeofday
 
-// pthread_create
-// pthread_detach
-// pthread_join
-
-// pthread_mutex_init
-// pthread_mutex_destroy
-// pthread_mutex_lock
-// pthread_mutex_unlock
-
-// Number of mutex-s
-// Each Philo has a fork (right) and points to the previous fork (left)
-// The first philo points to the last philo's fork (as in a circle)
-// 		pthread_mutex_t	*r_fork;
-// 		pthread_mutex_t	*l_fork;
-
-// Each philos sync their meal, dead and write mutexes to the Witness's
-// 		pthread_mutex_t	*write_lock;
-// 		pthread_mutex_t	*dead_lock;
-// 		pthread_mutex_t	*meal_lock;
-
-// Witness's main routine: monitor_routine
-// Each Philo's main routine: philo_routine
-// Main program's main routine: main
-
-// Dudas en philo_threads y philo_monitor
 int	main(int argc, char **argv)
 {
 	t_program		program;

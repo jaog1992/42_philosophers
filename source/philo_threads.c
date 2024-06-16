@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "philo.h"
-#include "../libraries/libft/include/libft.h"
 
 // Destroys all the mutexes
 void	destroy_mutex(char *str, t_program *program, pthread_mutex_t *forks)
@@ -45,7 +44,7 @@ int	dead_loop(t_philo *philo)
 	return (0);
 }
 
-// Thread routine. Odd numbered philos sleep 1us
+// Thread routine. Even numbered philos sleep 1us
 void	*philo_routine(void *pointer)
 {
 	t_philo	*philo;
@@ -63,21 +62,12 @@ void	*philo_routine(void *pointer)
 }
 
 // Creates all the threads
-// int pthread_create(pthread_t *restrict thread,
-//                          const pthread_attr_t *restrict attr,
-//                          void *(*start_routine)(void *),
-//                          void *restrict arg);
-
-// ¿Se hace el pthread_join sin haber terminado el thread del Witness o del 
-// philo?
-// ¿Como sabe thread_create cuando hacer el join? ¿Donde espera a que se 
-// termine el thread para unirlo al del main?
 int	thread_create(t_program *program, pthread_mutex_t *forks)
 {
 	int			i;
 	pthread_t	witness;
 
-	if (pthread_create(&witness, NULL, &monitor_routine, program->philos) != 0)
+	if (pthread_create(&witness, NULL, &witness_routine, program->philos) != 0)
 		destroy_mutex("Thread creation error", program, forks);
 	i = 0;
 	while (i < program->philos[0].num_of_philos)
@@ -96,5 +86,5 @@ int	thread_create(t_program *program, pthread_mutex_t *forks)
 			destroy_mutex("Thread join error", program, forks);
 		i++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
