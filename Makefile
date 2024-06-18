@@ -6,7 +6,7 @@
 #    By: jde-orma <jde-orma@42urduliz.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 08:02:50 by jde-orma          #+#    #+#              #
-#    Updated: 2023/03/23 08:02:50 by jde-orma         ###   ########.fr        #
+#    Updated: 2023/06/18 16:28:00 by jde-orma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,43 +47,12 @@ CODE_BIN      = $(BIN_DIR)$(CODE)
 # Output executable
 NAME          = $(CODE)
 
-# Create the obj/ and bin/ directories if they don't exist
-#$(shell mkdir -p $(OBJ_DIR) $(BIN_DIR))
-
-# $(info $(BLUE) SRC_DIR is $(GREEN) $(SRC_DIR) $(DEF_COLOR))
-# $(info $(BLUE) SRC_FILE is $(GREEN) $(SRC_FILE) $(DEF_COLOR))
-# $(info $(BLUE) OBJ_DIR is $(GREEN) $(OBJ_DIR) $(DEF_COLOR))
-# $(info $(BLUE) OBJ_FILE is $(GREEN) $(OBJ_FILE) $(DEF_COLOR))
-
 all: $(CODE_BIN)
-
-# APUNTES
-# $^ Evalua todos archivos puestos tras la regla.
-# Ejemplo: 
-# 			all: library.cpp main.cpp
-#				 $@ evaluates to all
-#				 $< evaluates to library.cpp
-#				 $^ evaluates to library.cpp main.cpp
-# patsubt  ...	$(patsubst pattern,replacement,text)
-#				Busca un "patron" y lo substituye por el "remplazo" propuesto en el directorio "text"
-# sort     ...	$(sort list)
-#				Ordena alfabeticamente la "lista" dada evitando duplicados separandolas por un espacio en blanco
-# wildcard ...	$(wildcard pattern…)
-#				Se usa para remplazar el texto buscado "proxy/convencional/*.cc" por una lista de todos los archivos 
-#				que encajan con el patron separados por espacios en blanco
-
-# -I para indicar directorio de includes
-# -L para indicar directorio de librerias
-# -lft para que el enlazador busque una biblioteca que siga la convención de nombramiento estándar (lib + nombre), en este caso, libft.
-# -o $@ para indicar el nombre de salida del ejecutable. -o indica que el siguiente nombre es el del ejecutable y $@ para que sea lo que se guarda en la variable CODE_BIN
 
 $(CODE_BIN): $(OBJ)
 	@$(CC) $(CCFLAGS) -o $@ $(OBJ) -I $(INC_DIR) 
 	@echo "$(GREEN)✔ $(BLUE)$(USER_NAME)'s $(CODE_BIN) compilation$(DEF_COLOR)"
 
-# % es un comodín que indica que la regla se aplicará a todo archivo que termine por .o en el directorio $(OBJ_DIR)
-# $< hace referencia al primer requisito de la regla, en nuestro caso, $(SRC_DIR)%.c
-# $@ hace referencia al nombre del archivo .o creado cada vez. Junto a $< va asignando nombre a cada .o creado
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CCFLAGS) -c $< -o $@
 
