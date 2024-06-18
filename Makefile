@@ -62,7 +62,7 @@ clean:
 
 fclean: clean
 	@$(RM) $(CODE_BIN)
-	@echo "$(GREEN)✔ $(BLUE)$(USER_NAME)'s $(CODE_BIN) executable and .o files removal$(DEF_COLOR)"
+	@echo "$(GREEN)✔ $(BLUE)$(USER_NAME)'s $(CODE_BIN) executable removal$(DEF_COLOR)"
 
 re: fclean all
 
