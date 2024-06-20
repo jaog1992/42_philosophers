@@ -1,8 +1,14 @@
-# PHILOSOPHERS
+<h1 align="center">
+	PHILOSOPHERS
+</h1>
 
-## Final grade 100/100
-  
-## Description
+<p align="center">
+	<b><i>Philosophers project for the 42 cursus</i></b><br>
+	
+<p align="center">
+	<i> Final grade 100/100 </i>
+
+## 💡 About
   Solo – about 70 hours
 
 In this project, you will learn the basics of threading a process. You will see how to create threads and you will discover mutexes.
@@ -127,21 +133,20 @@ All philos have pointers to all this variables, except to the array of philos.
     The philo_routine works likewise.
 
 6. Witness routine:
-Thread routines has void * as arguments, thus, we cast the argument to a variable with the desired data type.
+Thread routines has void * as arguments, thus, we cast the argument to a variable with the desired data type. An infinite while look checks if anyone dies, dead_flag == 1 or if all of the philos ate no_more_meals_flag == 1. 
 
-The and infinite while look checks if anyone dies (1) or if all of the philos ate (1). 
+- <b>dead_flag(philos)</b>
+	Checks if the time since the last meal is >= to the time to die.
+	If yes the dead_flag==1 and the while loop ends.
 
-	- dead_flag(philos)
-		Checks if the time since the last meal is >= to the time to die.
-        If yes the dead_flag==1 and the while loop ends.
-	-no_more_meals_flag(philos)
-		If the las argument is not set it will always return 0.
-        Else it will check all the philos 1 by 1 and if they all ate it changes de dead_flag to 1 (which all philos and the witness have a pointer to),
-        and returns a 1 to end the loop.
-7. Rutina del filosofo:	
+- <b>no_more_meals_flag(philos)</b>
+	If the las argument is not set it will always return 0.
+	Else it will check all the philos 1 by 1 and if they all ate it changes de dead_flag to 1 (which all philos and the witness have a pointer to),and returns a 1 to end the loop.
+
+7. philosopher routine:	
 We cast the argument to a t_philo structure.
 If the philo has an even id we wait time_to_eat - 20.
-Else we enter a loop that ends when the dead_flag == 1 (it means that the philo died or all ate... I know the name is confusing)
-	The loop calls the eat, dream, and think functions.
+Else we enter a loop that ends when the dead_flag == 1 (it means that the philo died or all ate... I know the name is confusing).
+The loop calls the eat, dream, and think functions.
 
 All the resources that are accessed by different thread are protected by mutexes.
